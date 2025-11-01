@@ -62,7 +62,8 @@ void setup() {
 
   // ==== Baca Sensor ====
   float soilRaw = analogRead(soilMoisturePin);
-  float soilMoisture = (1.0 - (soilRaw / 4095.0)) * 100.0;
+  float p = -3.34 + (0.0253 * soilRaw) + (-4.08e-5 * pow(soilRaw, 2)); // Corrected exponentiation 1
+  float soilMoisture = p*100-10;
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
   float lux = lightMeter.readLightLevel();
